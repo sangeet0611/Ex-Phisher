@@ -5,7 +5,7 @@
 if [[ $(uname -o) == *'Android'* ]];then
 	EXPHISHER_ROOT="/data/data/com.termux/files/usr/opt/exphisher"
 else
-	export EXPHISHER_ROOT="/opt/zphisher"
+	export EXPHISHER_ROOT="/opt/exphisher"
 fi
 
 if [[ $1 == '-h' || $1 == 'help' ]]; then
